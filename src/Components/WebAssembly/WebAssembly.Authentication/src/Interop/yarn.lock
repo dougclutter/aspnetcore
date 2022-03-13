@@ -2570,6 +2570,11 @@ source-map-support@~0.5.19:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
+source-map@0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.2.tgz#115c3e891aaa9a484869fd2b89391a225feba344"
+  integrity sha512-NDJB/R2BS7YJG0tP9SbE4DKwKj1idLT5RJqfVYZ7dreFX7wulZT3xxVhbYKrQo9n0JkRptl51TrX/5VK3HodMA==
+
 source-map@^0.5.0:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
@@ -2692,7 +2697,7 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-ts-loader@^9.2.5:
+ts-loader@9.2.5:
   version "9.2.5"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.2.5.tgz#127733a5e9243bf6dafcb8aa3b8a266d8041dca9"
   integrity sha512-al/ATFEffybdRMUIr5zMEWQdVnCGMUA9d3fXJ8dBVvBlzytPvIszoG9kZoR+94k6/i293RnVOXwMaWbXhNy9pQ==
