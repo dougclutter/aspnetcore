@@ -1,0 +1,20 @@
+{
+  "solution": {
+    "path": "..\\..\\..\\..\\AspNetCore.sln",
+    "projects": [
+      "src\\Components\\Authorization\\src\\Microsoft.AspNetCore.Components.Authorization.csproj",
+      "src\\Components\\Components\\src\\Microsoft.AspNetCore.Components.csproj",
+      "src\\Components\\Forms\\src\\Microsoft.AspNetCore.Components.Forms.csproj",
+      "src\\Components\\WebAssembly\\Authentication.Msal\\src\\Microsoft.Authentication.WebAssembly.Msal.csproj",
+      "src\\Components\\WebAssembly\\JSInterop\\src\\Microsoft.JSInterop.WebAssembly.csproj",
+      "src\\Components\\WebAssembly\\WebAssembly.Authentication\\src\\Microsoft.AspNetCore.Components.WebAssembly.Authentication.csproj",
+      "src\\Components\\WebAssembly\\WebAssembly.Authentication\\test\\Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests.csproj",
+      "src\\Components\\WebAssembly\\WebAssembly\\src\\Microsoft.AspNetCore.Components.WebAssembly.csproj",
+      "src\\Components\\Web\\src\\Microsoft.AspNetCore.Components.Web.csproj",
+      "src\\Http\\Metadata\\src\\Microsoft.AspNetCore.Metadata.csproj",
+      "src\\JSInterop\\Microsoft.JSInterop\\src\\Microsoft.JSInterop.csproj",
+      "src\\Security\\Authorization\\Core\\src\\Microsoft.AspNetCore.Authorization.csproj",
+      "src\\Testing\\src\\Microsoft.AspNetCore.Testing.csproj"
+    ]
+  }
+}
