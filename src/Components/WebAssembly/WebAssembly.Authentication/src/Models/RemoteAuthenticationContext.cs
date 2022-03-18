@@ -18,5 +18,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// Gets or sets the state instance for the current authentication operation.
         /// </summary>
         public TRemoteAuthenticationState State { get; set; }
+
+        /// <summary>
+        /// Gets or sets the index of the known authority passed to MSAL for the signIn process.
+        /// </summary>
+        public int KnownAuthorityIndex { get; set; }
     }
 }

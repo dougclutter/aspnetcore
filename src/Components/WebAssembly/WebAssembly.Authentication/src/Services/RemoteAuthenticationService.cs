@@ -80,7 +80,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             RemoteAuthenticationContext<TRemoteAuthenticationState> context)
         {
             await EnsureAuthService();
-            var internalResult = await JsRuntime.InvokeAsync<InternalRemoteAuthenticationResult<TRemoteAuthenticationState>>("AuthenticationService.signIn", context.State);
+            var internalResult = await JsRuntime.InvokeAsync<InternalRemoteAuthenticationResult<TRemoteAuthenticationState>>("AuthenticationService.signIn", context.State, context.KnownAuthorityIndex);
             var result = internalResult.Convert();
             if (result.Status == RemoteAuthenticationStatus.Success)
             {

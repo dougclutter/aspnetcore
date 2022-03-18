@@ -168,7 +168,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             switch (Action)
             {
                 case RemoteAuthenticationActions.LogIn:
-                    await ProcessLogIn(GetReturnUrl(state: null));
+                    await ProcessLogIn(GetReturnUrl(state: null), 0);
                     break;
                 case RemoteAuthenticationActions.LogInCallback:
                     await ProcessLogInCallback();
@@ -176,26 +176,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 case RemoteAuthenticationActions.LogInFailed:
                     break;
                 case RemoteAuthenticationActions.Profile:
-                    if (ApplicationPaths.RemoteProfilePath == null)
-                    {
-                        UserProfile ??= ProfileNotSupportedFragment;
-                    }
-                    else
-                    {
-                        UserProfile ??= LoggingIn;
-                        await RedirectToProfile();
-                    }
+                    await ProcessLogIn(GetReturnUrl(state: null), 2);
                     break;
                 case RemoteAuthenticationActions.Register:
-                    if (ApplicationPaths.RemoteRegisterPath == null)
-                    {
-                        Registering ??= RegisterNotSupportedFragment;
-                    }
-                    else
-                    {
-                        Registering ??= LoggingIn;
-                        await RedirectToRegister();
-                    }
+                    await ProcessLogIn(GetReturnUrl(state: null), 1);
                     break;
                 case RemoteAuthenticationActions.LogOut:
                     await ProcessLogOut(GetReturnUrl(state: null, Navigation.ToAbsoluteUri(ApplicationPaths.LogOutSucceededPath).AbsoluteUri));
@@ -212,12 +196,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             }
         }
 
-        private async Task ProcessLogIn(string returnUrl)
+        private async Task ProcessLogIn(string returnUrl, int knownAuthorityIndex)
         {
             AuthenticationState.ReturnUrl = returnUrl;
             var result = await AuthenticationService.SignInAsync(new RemoteAuthenticationContext<TAuthenticationState>
             {
-                State = AuthenticationState
+                State = AuthenticationState,
+                KnownAuthorityIndex = knownAuthorityIndex
             });
 
             switch (result.Status)

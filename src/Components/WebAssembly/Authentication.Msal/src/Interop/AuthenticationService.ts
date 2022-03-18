@@ -37,7 +37,7 @@ interface AuthenticationResult {
 interface AuthorizeService {
     getUser(): Promise<object | undefined>;
     getAccessToken(request?: AccessTokenRequestOptions): Promise<AccessTokenResult>;
-    signIn(state: any): Promise<AuthenticationResult>;
+    signIn(state: any, knownAuthorityIndex: number): Promise<AuthenticationResult>;
     completeSignIn(state: any): Promise<AuthenticationResult>;
     signOut(state: any): Promise<AuthenticationResult>;
     completeSignOut(url: string): Promise<AuthenticationResult>;
@@ -142,15 +142,15 @@ class MsalAuthorizeService implements AuthorizeService {
             expires: response.expiresOn
         };
     }
-
-    async signIn(state: any) {
+    async signIn(state: any, knownAuthorityIndex: number) {
         try {
             // Before we start any sign-in flow, clear out any previous state so that it doesn't pile up.
             this.purgeState();
 
             const request: Partial<Msal.AuthorizationUrlRequest> = {
                 redirectUri: this._settings.auth.redirectUri!,
-                state: await this.saveState(state)
+                state: await this.saveState(state),
+                authority: this._settings.auth.knownAuthorities![knownAuthorityIndex]
             };
 
             if (this._settings.defaultAccessTokenScopes && this._settings.defaultAccessTokenScopes.length > 0) {
@@ -395,8 +395,8 @@ export class AuthenticationService {
         return AuthenticationService.instance.getAccessToken(request);
     }
 
-    public static signIn(state: any) {
-        return AuthenticationService.instance.signIn(state);
+    public static signIn(state: any, knownAuthorityIndex: number) {
+        return AuthenticationService.instance.signIn(state, knownAuthorityIndex);
     }
 
     // url is not used in the msal.js implementation but we keep it here
