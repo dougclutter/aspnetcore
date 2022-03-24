@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <Sdk Name="Yarn.MSBuild" />
 
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
-    <Description>Authenticate your Blazor webassembly applications with Azure Active Directory and Azure Active Directory B2C</Description>
+    <Description>Authenticate your Blazor webassembly applications with Azure Active Directory and Azure Active Directory B2C. Hacked to include support for Register and Profile user flows.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Trimmable>true</Trimmable>
     <Nullable>disable</Nullable>
@@ -29,6 +29,12 @@
       IncludeCompileInteropOutput;
       $(ResolveStaticWebAssetsInputsDependsOn)
     </ResolveStaticWebAssetsInputsDependsOn>
+    <PackageId>Register.Microsoft.Authentication.WebAssembly.Msal</PackageId>
+    <Authors>Microsoft,dougc</Authors>
+    <PackageProjectUrl>https://github.com/dougclutter/aspnetcore/tree/FixRedirectToRegister</PackageProjectUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/dougclutter/aspnetcore/tree/FixRedirectToRegister</RepositoryUrl>
+    <PackageTags>aspnetcore;components;blazor;B2C</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,6 +47,13 @@
 
     <UpToDateCheckInput Include="@(YarnInputs)" Set="StaticWebassets" />
     <UpToDateCheckOutput Include="@(YarnOutputs)" Set="StaticWebassets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <Target Name="_CreateInteropHash" BeforeTargets="CompileInterop" Condition="'$(BuildNodeJS)' != 'false' AND '$(DesignTimeBuild)' != 'true'">
@@ -75,14 +88,7 @@
       <_InteropBuildOutput Include="$(YarnWorkingDir)dist\$(Configuration)\**" Exclude="$(YarnWorkingDir)dist\.gitignore" />
     </ItemGroup>
 
-    <DefineStaticWebAssets Condition="@(_InteropBuildOutput) != ''"
-      SourceType="Computed"
-      SourceId="$(PackageId)"
-      ContentRoot="$(YarnWorkingDir)dist\$(Configuration)\"
-      BasePath="_content/$(PackageId)"
-      CandidateAssets="@(_InteropBuildOutput)"
-      RelativePathFilter="**.js"
-    >
+    <DefineStaticWebAssets Condition="@(_InteropBuildOutput) != ''" SourceType="Computed" SourceId="$(PackageId)" ContentRoot="$(YarnWorkingDir)dist\$(Configuration)\" BasePath="_content/$(PackageId)" CandidateAssets="@(_InteropBuildOutput)" RelativePathFilter="**.js">
       <Output TaskParameter="Assets" ItemName="StaticWebAsset" />
     </DefineStaticWebAssets>
 
@@ -91,5 +97,5 @@
       <FileWrites Include="$(_InteropBuildOutput)" />
     </ItemGroup>
   </Target>
-
+  
 </Project>
