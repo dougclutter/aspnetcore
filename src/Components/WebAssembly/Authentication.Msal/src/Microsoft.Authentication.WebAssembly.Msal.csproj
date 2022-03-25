@@ -35,6 +35,8 @@
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/dougclutter/aspnetcore/tree/FixRedirectToRegister</RepositoryUrl>
     <PackageTags>aspnetcore;components;blazor;B2C</PackageTags>
+    <Version>$(VersionPrefix)</Version>
+    <PackageVersion>$(VersionPrefix)-rc1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
